@@ -4,15 +4,17 @@ import "./index.css"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import AppProvider from "./data/AppProvider"
-import { BrowserRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProvider>
-      <Router>
-        <App />
-      </Router>
-    </AppProvider>
+    <Router>
+      <AppProvider>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </AppProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 )

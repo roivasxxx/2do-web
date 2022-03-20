@@ -7,12 +7,12 @@ import { colors } from "../utils/theme"
 import "./TopMenu.css"
 import styled from "styled-components"
 
+const StyledDiv = styled.div`
+  &:hover {
+    color: ${colors.primary};
+  }
+`
 export default function TopMenu() {
-  const StyledDiv = styled.div`
-    &:hover {
-      color: ${colors.primary};
-    }
-  `
   function NavItem({ redirectTo, label }) {
     return (
       <LinkContainer to={redirectTo} activeStyle={{ color: colors.primary }}>
