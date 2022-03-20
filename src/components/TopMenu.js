@@ -3,11 +3,12 @@ import Nav from "react-bootstrap/Nav"
 import Container from "react-bootstrap/Container"
 import { LinkContainer } from "react-router-bootstrap"
 import { Outlet } from "react-router-dom"
+import { colors } from "../utils/theme"
 
 export default function TopMenu() {
   function NavItem({ redirectTo, label }) {
     return (
-      <LinkContainer to={redirectTo} style={{ textDecoration: "none" }}>
+      <LinkContainer to={redirectTo} style={{ textDecoration: "none" }} activeStyle={{ color: colors.primary }}>
         <Nav.Link active={false}>{label}</Nav.Link>
       </LinkContainer>
     )
@@ -17,7 +18,7 @@ export default function TopMenu() {
       <Navbar bg="dark" variant="dark">
         <Container>
           <LinkContainer to="/" activeClassName="selected">
-            <Navbar.Brand>NftArt</Navbar.Brand>
+            <Navbar.Brand>2DO</Navbar.Brand>
           </LinkContainer>
           <Nav className="me-auto">
             <NavItem redirectTo="/about" label="About" />

@@ -5,7 +5,7 @@ import TopMenu from "./components/TopMenu"
 
 export default function App() {
   return (
-    <div className="App" style={{ height: "100%" }}>
+    <div className="App" style={{ height: "100%", backgroundColor: "#737373" }}>
       <Routes>
         <Route path="/" element={TopMenu()}>
           <Route index element={Screens.Home()} />
