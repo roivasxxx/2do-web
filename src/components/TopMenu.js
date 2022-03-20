@@ -4,15 +4,25 @@ import Container from "react-bootstrap/Container"
 import { LinkContainer } from "react-router-bootstrap"
 import { Outlet } from "react-router-dom"
 import { colors } from "../utils/theme"
+import "./TopMenu.css"
+import styled from "styled-components"
 
 export default function TopMenu() {
+  const StyledDiv = styled.div`
+    &:hover {
+      color: ${colors.primary};
+    }
+  `
   function NavItem({ redirectTo, label }) {
     return (
-      <LinkContainer to={redirectTo} style={{ textDecoration: "none" }} activeStyle={{ color: colors.primary }}>
-        <Nav.Link active={false}>{label}</Nav.Link>
+      <LinkContainer to={redirectTo} activeStyle={{ color: colors.primary }}>
+        <Nav.Link active={false} className="custom-link">
+          <StyledDiv>{label}</StyledDiv>
+        </Nav.Link>
       </LinkContainer>
     )
   }
+
   return (
     <div style={{ height: "100%", display: "flex", flexFlow: "column" }}>
       <Navbar bg="dark" variant="dark">
@@ -27,6 +37,7 @@ export default function TopMenu() {
           </Nav>
         </Container>
       </Navbar>
+
       <div style={{ flex: 1, justifyContent: "center", alignItems: "center", display: "flex" }}>
         <Outlet />
       </div>
