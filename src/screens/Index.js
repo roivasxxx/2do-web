@@ -1,5 +1,5 @@
-export { default as Connect } from "./Connect"
+export { default as TaskOverview } from "./TaskOverview"
 export { default as About } from "./About"
-export { default as Home } from "./Home"
+export { default as Dashboard } from "./Dashboard"
 export { default as NoMatch } from "./NoMatch"
 export { default as UserProfile } from "./UserProfile"

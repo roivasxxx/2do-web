@@ -5,4 +5,5 @@ export const colors = {
   primary: "#bb86fc",
   error: "#cf6679",
   success: "#03dac6",
+  font:"#ffffff"
 }
