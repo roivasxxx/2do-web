@@ -31,9 +31,9 @@ export default function TopMenu() {
             <Navbar.Brand>2DO</Navbar.Brand>
           </LinkContainer>
           <Nav className="me-auto">
-            <NavItem redirectTo="/about" label="About" />
-            <NavItem redirectTo="/connect" label="Connect" />
+            <NavItem redirectTo="/tasks" label="Tasks" />
             <NavItem redirectTo="/userProfile" label="Profile" />
+            <NavItem redirectTo="/about" label="About"/>
           </Nav>
         </Container>
       </Navbar>
