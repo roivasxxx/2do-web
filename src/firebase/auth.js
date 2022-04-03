@@ -8,6 +8,8 @@ import {
   signOut,
 } from "firebase/auth"
 
+export const currentUser = auth?.currentUser
+
 export async function registerUser(email, password) {
   try {
     createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
@@ -31,9 +33,13 @@ export async function login(email, password) {
 }
 
 export async function authListener(setAuth) {
-  await setPersistence(auth, browserSessionPersistence).then(() => {
-    onAuthStateChanged(auth, (user) => {
-      setAuth(user)
-    })
+  console.log("nigger")
+  onAuthStateChanged(auth, (user) => {
+    console.log("listener: ", auth.currentUser)
+    if (user) setAuth(user)
   })
+}
+
+export async function setAuthPersistence() {
+  await setPersistence(auth, browserSessionPersistence)
 }

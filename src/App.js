@@ -4,13 +4,13 @@ import * as Screens from "./screens/Index"
 import TopMenu from "./components/TopMenu"
 import Layout from "./app/Layout"
 import RequireAuth from "./app/RequireAuth"
-import Login from "./screens/Login"
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={Screens.Login()} />
+        <Route path="/register" element={Screens.Register()} />
         <Route element={<RequireAuth />}>
           <Route path="/" element={TopMenu()}>
             <Route index element={Screens.Dashboard()} />

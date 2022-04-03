@@ -1,20 +1,15 @@
-import React, { useRef, useEffect } from "react"
-import { useAppProvider } from "../data/AppProvider"
+import React, { useRef } from "react"
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import Button from "react-bootstrap/esm/Button"
 import Form from "react-bootstrap/Form"
-import { login } from "../firebase/auth"
+import { registerUser } from "../firebase/auth"
 
-export default function Login() {
-  const { auth, setAuth } = useAppProvider()
+export default function Register() {
   const navigate = useNavigate()
-  const location = useLocation()
-  const from = location.state?.from?.pathname || "/"
   const userData = useRef({ email: "", password: "" })
 
   async function handleClick() {
-    login(userData.current.email, userData.current.password)
-    navigate(from, { replace: true })
+    registerUser(userData.current.email, userData.current.password)
   }
 
   function handlePropChange(propName, e) {
@@ -22,12 +17,6 @@ export default function Login() {
     curr[propName] = e.target.value
     userData.current = curr
   }
-
-  useEffect(() => {
-    if (auth?.accessToken) {
-      navigate(from, { replace: true })
-    }
-  }, [auth])
 
   return (
     <div>
@@ -37,21 +26,14 @@ export default function Login() {
           <Form.Control type="email" placeholder="Enter email" onChange={(e) => handlePropChange("email", e)} />
           <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" onChange={(e) => handlePropChange("password", e)} />
         </Form.Group>
-        <Form.Group className="row mx-4">
-          <Button variant="primary" onClick={() => handleClick()}>
-            Login
-          </Button>
-          <Form.Text className="text-muted">
-            Don't have an acount yet?{" "}
-            <Button variant="secondary" onClick={() => navigate("/register")}>
-              Sign up
-            </Button>
-          </Form.Text>
-        </Form.Group>
+        <Button variant="primary" onClick={() => handleClick()}>
+          Register
+        </Button>
       </Form>
     </div>
   )

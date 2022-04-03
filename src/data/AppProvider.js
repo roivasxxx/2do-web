@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react"
-import { authListener } from "../firebase/auth"
+import { authListener, setAuthPersistence } from "../firebase/auth"
 
 const AppContext = React.createContext()
 
@@ -10,13 +10,20 @@ export const useAppProvider = () => {
 
 export default function AppProvider(props) {
   const [appData, setAppData] = useState({ temp: "tempData" })
-  const [auth, setAuth] = useState(null)
+  const [auth, setAuth] = useState(undefined)
+
   useEffect(() => {
-    const listener = async () => {
-      await authListener(setAuth)
+    console.log("AppProvider mounted")
+    const listener = () => {
+      setAuthPersistence()
+      authListener(setAuth)
     }
     listener()
-    return () => console.log("Unmounted AppProvider")
+    return () => {
+      listener()
+      console.log("Unmounted AppProvider")
+    }
   }, [])
+
   return <AppContext.Provider value={{ appData, setAppData, auth, setAuth }}>{props.children}</AppContext.Provider>
 }
