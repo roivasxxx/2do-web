@@ -4,7 +4,7 @@ import { useAppProvider } from "../data/AppProvider"
 const RequireAuth = () => {
   const { auth } = useAppProvider()
   const location = useLocation()
-  return auth.userLogged ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace />
+  return auth?.accessToken ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace />
 }
 
 export default RequireAuth
