@@ -14,7 +14,7 @@ const RequireAuth = () => {
   ) : auth?.accessToken || currentUser?.accessToken ? (
     <Outlet />
   ) : (
-    (<Navigate to="/login" state={{ from: location }} replace />)()
+    <Navigate to="/login" state={{ from: location }} replace />
   )
 }
 

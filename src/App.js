@@ -14,9 +14,9 @@ export default function App() {
         <Route element={<RequireAuth />}>
           <Route path="/" element={TopMenu()}>
             <Route index element={Screens.Dashboard()} />
-            <Route path="about" element={Screens.About()} />
-            <Route path="connect" element={Screens.TaskOverview()} />
-            <Route path="userProfile" element={Screens.UserProfile()} />
+            <Route path="/about" element={Screens.About()} />
+            <Route path="/tasks" element={Screens.TaskOverview()} />
+            <Route path="/userProfile" element={Screens.UserProfile()} />
           </Route>
         </Route>
         <Route path="*" element={Screens.NoMatch()} />

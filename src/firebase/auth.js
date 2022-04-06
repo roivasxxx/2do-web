@@ -33,10 +33,9 @@ export async function login(email, password) {
 }
 
 export async function authListener(setAuth) {
-  console.log("nigger")
   onAuthStateChanged(auth, (user) => {
     console.log("listener: ", auth.currentUser)
-    if (user) setAuth(user)
+    setAuth(user)
   })
 }
 
