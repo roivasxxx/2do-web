@@ -6,6 +6,8 @@ import { Outlet } from "react-router-dom"
 import { colors } from "../utils/theme"
 import "./TopMenu.css"
 import styled from "styled-components"
+import Button from "react-bootstrap/esm/Button"
+import { logOut } from "../firebase/auth"
 
 const StyledDiv = styled.div`
   &:hover {
@@ -33,8 +35,11 @@ export default function TopMenu() {
           <Nav className="me-auto">
             <NavItem redirectTo="/tasks" label="Tasks" />
             <NavItem redirectTo="/userProfile" label="Profile" />
-            <NavItem redirectTo="/about" label="About"/>
+            <NavItem redirectTo="/about" label="About" />
           </Nav>
+          <Button onClick={() => logOut()} variant="dark" style={{ alignSelf: "end" }}>
+            Logout
+          </Button>
         </Container>
       </Navbar>
 

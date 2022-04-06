@@ -1,0 +1,1 @@
+create BE folder, init cloud functions for firebase, create function that creates collections when user creates their account

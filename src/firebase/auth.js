@@ -42,3 +42,11 @@ export async function authListener(setAuth) {
 export async function setAuthPersistence() {
   await setPersistence(auth, browserSessionPersistence)
 }
+
+export async function logOut() {
+  try {
+    await auth.signOut()
+  } catch (error) {
+    console.error("Error while loging out: ", error)
+  }
+}
