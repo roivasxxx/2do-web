@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react"
 import { authListener, setAuthPersistence } from "../firebase/auth"
+import { callendarOnSnapshot } from "../firebase/firestore"
 
 const AppContext = React.createContext()
 
@@ -13,7 +14,6 @@ export default function AppProvider(props) {
   const [auth, setAuth] = useState(undefined)
 
   useEffect(() => {
-    console.log("AppProvider mounted")
     const listener = () => {
       setAuthPersistence()
       authListener(setAuth)
@@ -21,9 +21,14 @@ export default function AppProvider(props) {
     listener()
     return () => {
       listener()
-      console.log("Unmounted AppProvider")
     }
   }, [])
+
+  useEffect(() => {
+    if (auth?.email) {
+      callendarOnSnapshot(auth?.email, setAppData)
+    }
+  }, [auth])
 
   return <AppContext.Provider value={{ appData, setAppData, auth, setAuth }}>{props.children}</AppContext.Provider>
 }

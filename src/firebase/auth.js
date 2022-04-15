@@ -24,9 +24,7 @@ export async function registerUser(email, password) {
 
 export async function login(email, password) {
   try {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      console.log("Login :", userCredential)
-    })
+    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {})
   } catch (error) {
     console.error("Error while loging in: ", error)
   }
@@ -34,7 +32,7 @@ export async function login(email, password) {
 
 export async function authListener(setAuth) {
   onAuthStateChanged(auth, (user) => {
-    console.log("listener: ", auth.currentUser)
+    console.log("listener: ", user)
     setAuth(user)
   })
 }
