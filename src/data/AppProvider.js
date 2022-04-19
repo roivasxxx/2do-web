@@ -4,14 +4,16 @@ import { callendarOnSnapshot } from "../firebase/firestore"
 
 const AppContext = React.createContext()
 
+//custom hook pro přístup dat skrz celou aplikaci
 export const useAppProvider = () => {
-  const { appData, setAppData, auth, setAuth } = useContext(AppContext)
-  return { appData, setAppData, auth, setAuth }
+  const { appData, setAppData, auth, setAuth, unsub, setUnsub } = useContext(AppContext)
+  return { appData, setAppData, auth, setAuth, unsub, setUnsub }
 }
 
 export default function AppProvider(props) {
-  const [appData, setAppData] = useState({ temp: "tempData" })
+  const [appData, setAppData] = useState([])
   const [auth, setAuth] = useState(undefined)
+  const [unsub, setUnsub] = useState(() => () => {})
 
   useEffect(() => {
     const listener = () => {
@@ -25,10 +27,15 @@ export default function AppProvider(props) {
   }, [])
 
   useEffect(() => {
+    setAppData([])
     if (auth?.email) {
-      callendarOnSnapshot(auth?.email, setAppData)
+      callendarOnSnapshot(auth?.email, setAppData, setUnsub)
     }
   }, [auth])
 
-  return <AppContext.Provider value={{ appData, setAppData, auth, setAuth }}>{props.children}</AppContext.Provider>
+  return (
+    <AppContext.Provider value={{ appData, setAppData, auth, setAuth, unsub, setUnsub }}>
+      {props.children}
+    </AppContext.Provider>
+  )
 }

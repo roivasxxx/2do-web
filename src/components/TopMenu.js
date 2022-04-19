@@ -8,13 +8,20 @@ import "./TopMenu.css"
 import styled from "styled-components"
 import Button from "react-bootstrap/esm/Button"
 import { logOut } from "../firebase/auth"
+import { useAppProvider } from "../data/AppProvider"
 
 const StyledDiv = styled.div`
   &:hover {
     color: ${colors.primary};
   }
 `
+
+/**
+ *
+ * Navigace - zajištěna pomocí react-router-dom
+ */
 export default function TopMenu() {
+  const { unsub, setUnsub } = useAppProvider()
   function NavItem({ redirectTo, label }) {
     return (
       <LinkContainer to={redirectTo} activeStyle={{ color: colors.primary }}>
@@ -25,20 +32,25 @@ export default function TopMenu() {
     )
   }
 
+  function handleLogout() {
+    unsub()
+    setUnsub(() => () => {})
+    logOut()
+  }
+
   return (
     <div style={{ height: "100%", display: "flex", flexFlow: "column" }}>
       <Navbar bg="dark" variant="dark">
         <Container>
           <LinkContainer to="/" activeClassName="selected">
-            <Navbar.Brand>2DO</Navbar.Brand>
+            <Navbar.Brand>Kalendář</Navbar.Brand>
           </LinkContainer>
           <Nav className="me-auto">
-            <NavItem redirectTo="/tasks" label="Tasks" />
-            <NavItem redirectTo="/userProfile" label="Profile" />
-            <NavItem redirectTo="/about" label="About" />
+            <NavItem redirectTo="/tasks" label="Kalendář" />
+            <NavItem redirectTo="/userProfile" label="Profil" />
           </Nav>
-          <Button onClick={() => logOut()} variant="dark" style={{ alignSelf: "end" }}>
-            Logout
+          <Button onClick={() => handleLogout()} variant="dark" style={{ alignSelf: "end" }}>
+            Odhlásit
           </Button>
         </Container>
       </Navbar>
@@ -46,6 +58,7 @@ export default function TopMenu() {
       <div style={{ flex: 1, justifyContent: "center", alignItems: "center", display: "flex" }}>
         <Outlet />
       </div>
+      <footer>Semestrální projekt - TNPW2 - Patrik Pahulák</footer>
     </div>
   )
 }

@@ -5,34 +5,24 @@ import {
   onAuthStateChanged,
   setPersistence,
   browserSessionPersistence,
-  signOut,
+  updatePassword,
 } from "firebase/auth"
+
+//auth.js - zajištění funkcionalit přihlašování, registrace, loginu, obecně všeho
+// co má co dočinění s firebase/auth
 
 export const currentUser = auth?.currentUser
 
 export async function registerUser(email, password) {
-  try {
-    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      // Signed in
-      const user = userCredential.user
-      console.log(userCredential)
-    })
-  } catch (error) {
-    console.error("Error while registering user: ", error)
-  }
+  await createUserWithEmailAndPassword(auth, email, password)
 }
 
 export async function login(email, password) {
-  try {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {})
-  } catch (error) {
-    console.error("Error while loging in: ", error)
-  }
+  await signInWithEmailAndPassword(auth, email, password)
 }
 
 export async function authListener(setAuth) {
   onAuthStateChanged(auth, (user) => {
-    console.log("listener: ", user)
     setAuth(user)
   })
 }
@@ -46,5 +36,13 @@ export async function logOut() {
     await auth.signOut()
   } catch (error) {
     console.error("Error while loging out: ", error)
+  }
+}
+
+export async function changePassword(newPassword) {
+  try {
+    await updatePassword(auth.currentUser, newPassword)
+  } catch (error) {
+    console.error("Error while changing password: ", error)
   }
 }

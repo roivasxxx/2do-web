@@ -5,6 +5,7 @@ import TopMenu from "./components/TopMenu"
 import Layout from "./app/Layout"
 import RequireAuth from "./app/RequireAuth"
 
+//hlavní react component, obsahuje routes pro react-router-dom
 export default function App() {
   return (
     <Routes>
@@ -14,7 +15,6 @@ export default function App() {
         <Route element={<RequireAuth />}>
           <Route path="/" element={TopMenu()}>
             <Route index element={Screens.Dashboard()} />
-            <Route path="/about" element={Screens.About()} />
             <Route path="/tasks" element={Screens.TaskOverview()} />
             <Route path="/userProfile" element={Screens.UserProfile()} />
           </Route>

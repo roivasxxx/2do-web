@@ -3,6 +3,8 @@ import { getAnalytics } from "firebase/analytics"
 import { getFirestore } from "firebase/firestore"
 import { getAuth, setPersistence, browserSessionPersistence } from "firebase/auth"
 
+//konfigurace firebase
+
 const firebaseConfig = {
   apiKey: "AIzaSyA6N5uJZlJfV-OmlXnZc-FCpGWOPCpei7w",
   authDomain: "doweb-9c07a.firebaseapp.com",
